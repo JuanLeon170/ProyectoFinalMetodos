@@ -17,3 +17,17 @@ Minimizando la suma de errores al cuadrado $S(k) = \sum (y_i + k \cdot x_i)^2$, 
 **Calidad del Ajuste ($R^2$):**  
 Se mide la precisión del modelo ajustado frente a los datos experimentales mediante:
    $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
+
+# Integrante 4: Leydy Andrea Salinas Diaz - Ingeniero de Software, Visualización y Git Master
+**Rol:** Diseñador del Pipeline, Gráficas y Documentación GitHub
+**Objetivo:** Integrar los scripts de los compañeros, generar las visualizaciones científicas y mantener el repositorio profesional.
+
+**Responsabilidades en el código y GitHub:**
+1. **Script Principal (`main.py`):** Unir los módulos de los Integrantes 1, 2 y 3 en un flujo de ejecución continuo y fácil de correr.
+2. **Módulo de Visualización (`matplotlib` / `seaborn`):** Generar y exportar gráficas de alta calidad:
+   - Curva de secado $M(t)$ vs. Tiempo con zona de humedad óptima sombreada (11%-12%).
+   - Comparativa de error: RK4 vs. Euler.
+   - Ajuste de Mínimos Cuadrados sobre los puntos experimentales.
+3. **Documentación:** Crear el archivo `README.md` estructurado con la explicación matemática, el diagramado de variables y las instrucciones de instalación (`requirements.txt`).
+
+**Archivos a su cargo en GitHub:** `main.py`, `src/graficador.py`, `README.md`, `requirements.txt`.
