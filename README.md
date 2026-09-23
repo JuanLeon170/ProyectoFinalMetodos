@@ -68,3 +68,12 @@ Finalmente, se calcula la masa final del lote y la merma porcentual producida po
 `Merma (%) = (Agua evaporada / Masa inicial) × 100`
 
 El módulo también permite cargar directamente los datos experimentales desde `data/datos_secado_campo.csv` y ejecutar todo el procedimiento desde un único programa.
+
+## Integrante 2: Programador del Algoritmo Numérico (EDOs)
+**Estudiante:** Juan Carlos León Ramos
+
+### Responsabilidades desarrolladas:
+1. **Algoritmo RK4:** Implementación desde cero del método de Runge-Kutta de 4º Orden en `src/metodos_edo.py`.
+2. **Algoritmo de Euler:** Implementación comparativa de precisión y error según el tamaño de paso $h$.
+3. **Cálculo de parada:** Identificación del tiempo óptimo de secado (rango del 11% al 12% de humedad para Café Pergamino Seco).
+4. **Pruebas unitarias:** Módulo de validación de modelos en `tests/test_rk4.py`.
