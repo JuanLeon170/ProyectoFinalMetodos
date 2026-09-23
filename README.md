@@ -2,8 +2,7 @@
 # Mermas de secado del café 
 # Laura Sofia Bolivar Jimenez - Modelamiento fisico y calibracion de datos
 Formula la física del proceso de secado de café mediante la Ley de Secado de Thin-Layer y programar en Python la estimación del parámetro óptimo k (constante de secado) utilizando el método de Mínimos Cuadrados, evaluando el ajuste con el coeficiente de determinación R^2.
-
-# Modelo de Thin-Layer (Ecuación Diferencial)  
+**Modelo de Thin-Layer (Ecuación Diferencial)** 
 La tasa de cambio de humedad en el grano es proporcional a la diferencia entre su humedad actual M y la humedad de equilibrio M_e:
    $$\frac{dM}{dt} = -k(M - M_e)$$
 
