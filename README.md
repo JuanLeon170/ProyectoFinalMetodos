@@ -18,8 +18,8 @@ Minimizando la suma de errores al cuadrado $S(k) = \sum (y_i + k \cdot x_i)^2$, 
 Se mide la precisión del modelo ajustado frente a los datos experimentales mediante:
    $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
 
-**Leydy Andrea Salinas Diaz - Ingeniero de Software, Visualización y Git Master**
-**Diseñador del Pipeline, Gráficas y Documentación GitHub**
+#**Leydy Andrea Salinas Diaz - Ingeniero de Software, Visualización y Git Master**
+#**Diseñador del Pipeline, Gráficas y Documentación GitHub**
 Integrar los scripts de los compañeros, generar las visualizaciones científicas y mantener el repositorio profesional.
 
 **Responsabilidades en el código y GitHub:**
