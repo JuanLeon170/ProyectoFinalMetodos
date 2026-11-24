@@ -1,0 +1,13 @@
+Etapa,t_min,T_C,RoR_C_min,d2T_dt2_C_min2,K_t,regimen_termico
+Carga del café verde,0.0,100.0,10.0,6.0,0.0059111120210494405,Secado / Deshidratación (endotérmico)
+Inicio del secado,1.0,110.0,13.0,6.0,0.0027069352547554252,Secado / Deshidratación (endotérmico)
+Secado intermedio,2.0,126.0,17.5,3.0,0.0005570361972840972,Secado / Deshidratación (endotérmico)
+Secado avanzado,3.0,145.0,14.5,-9.0,0.0029312133705959916,Secado / Deshidratación (endotérmico)
+Amarillamiento,4.0,155.0,10.0,0.0,0.0,Maillard / Transición térmica
+Transición a Maillard,5.0,165.0,10.0,0.0,0.0,Maillard / Transición térmica
+Inicio de Maillard,6.0,175.0,8.5,-3.0,0.004785307067606711,Maillard / Transición térmica
+Maillard avanzado,7.0,182.0,7.0,0.0,0.0,Maillard / Transición térmica
+Desarrollo de color,8.0,189.0,7.0,0.0,0.0,Maillard / Transición térmica
+Primer crack,9.0,196.0,6.5,-1.0,0.0035157730463338983,Primer crack (exotérmico incipiente)
+Desarrollo del tueste,10.0,202.0,4.5,-3.0,0.03062547639792793,Desarrollo post-primer crack (exotérmico)
+Descarga,11.0,205.0,3.0,-3.0,0.09486832980505139,Desarrollo post-primer crack (exotérmico)

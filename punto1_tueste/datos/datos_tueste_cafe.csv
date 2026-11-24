@@ -1,0 +1,13 @@
+﻿Etapa,Tiempo,Temperatura aproximada,tiempo_min,temperatura_C
+Carga del café verde,0:00 min,100 °C,0.0,100.0
+Inicio del secado,1:00 min,110 °C,1.0,110.0
+Secado intermedio,2:00 min,126 °C,2.0,126.0
+Secado avanzado,3:00 min,145 °C,3.0,145.0
+Amarillamiento,4:00 min,155 °C,4.0,155.0
+Transición a Maillard,5:00 min,165 °C,5.0,165.0
+Inicio de Maillard,6:00 min,175 °C,6.0,175.0
+Maillard avanzado,7:00 min,182 °C,7.0,182.0
+Desarrollo de color,8:00 min,189 °C,8.0,189.0
+Primer crack,9:00 min,196 °C,9.0,196.0
+Desarrollo del tueste,10:00 min,202 °C,10.0,202.0
+Descarga,11:00 min,205 °C,11.0,205.0

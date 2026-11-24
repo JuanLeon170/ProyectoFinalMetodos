@@ -1,0 +1,13 @@
+Etapa,tiempo_min,temperatura_C,RoR_T_prima,T_segunda
+Carga del café verde,0.0,100.0,10.0,6.0
+Inicio del secado,1.0,110.0,13.0,6.0
+Secado intermedio,2.0,126.0,17.5,3.0
+Secado avanzado,3.0,145.0,14.5,-9.0
+Amarillamiento,4.0,155.0,10.0,0.0
+Transición a Maillard,5.0,165.0,10.0,0.0
+Inicio de Maillard,6.0,175.0,8.5,-3.0
+Maillard avanzado,7.0,182.0,7.0,0.0
+Desarrollo de color,8.0,189.0,7.0,0.0
+Primer crack,9.0,196.0,6.5,-1.0
+Desarrollo del tueste,10.0,202.0,4.5,-3.0
+Descarga,11.0,205.0,3.0,-3.0
