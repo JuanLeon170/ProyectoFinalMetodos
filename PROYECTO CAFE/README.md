@@ -1,22 +1,65 @@
 # ProyectoFinalMetodos
 # Mermas de secado del café 
-# Laura Sofia Bolivar Jimenez - Modelamiento fisico y calibracion de datos
-Formula la física del proceso de secado de café mediante la Ley de Secado de Thin-Layer y programar en Python la estimación del parámetro óptimo k (constante de secado) utilizando el método de Mínimos Cuadrados, evaluando el ajuste con el coeficiente de determinación R^2.
-**Modelo de Thin-Layer (Ecuación Diferencial)** 
-La tasa de cambio de humedad en el grano es proporcional a la diferencia entre su humedad actual M y la humedad de equilibrio M_e:
-   $$\frac{dM}{dt} = -k(M - M_e)$$
+# Laura Sofia Bolivar Jimenez
+## 3. Modelamiento fisico y calibracion de datos
+Constituye la base física y numérica para simular el proceso de secado del café pergamino lavado. En la poscosecha, controlar la velocidad con la que el grano pierde agua resulta indispensable para evitar tanto la proliferación de hongos por exceso de humedad ($M > 12\%$) como la cristalización y fractura física por sobre-secado ($M < 10\%$). Por consiguiente, este desarrollo transforma mediciones experimentales de campo (`datos_secado_campo.csv`) en constantes cinéticas calibradas mediante el algoritmo `calibracion_k.py`.
 
-**Linealización de Datos (Transformación $y = m \cdot x$):**  
-Definiendo la humedad adimensional $Y = \frac{M - M_e}{M_0 - M_e}$, la ecuación se linealiza aplicando logaritmo natural:
-   $$y = \ln(Y) \quad \text{donde} \quad y = -k \cdot x \quad (x = t)$$
+Por otro lado, se seleccionaron rangos  respaldados por la literatura, como una humedad inicial $M_0 = 50.0\%$ (base húmeda), dado que aproximadamente la mitad del peso del grano recién lavado corresponde a agua libre y ligada.También, se define una humedad de equilibrio $M_e = 10.0\%$, la cual actúa como límite termodinámico en el que la presión de vapor interna del café iguala a la del aire caliente y detiene la transferencia de masa. Finalmente, se delimita un ciclo de monitoreo de $24\text{ horas}$ con intervalos de $2\text{ horas}$
 
-**Calibración mediante Mínimos Cuadrados:**  
-Minimizando la suma de errores al cuadrado $S(k) = \sum (y_i + k \cdot x_i)^2$, la pendiente $-k$ óptima se calcula derivando e igualando a cero:
-   $$k = -\frac{\sum x_i y_i}{\sum x_i^2}$$
+## 2. Fundamento Físico y Formulación Matemática
 
-**Calidad del Ajuste ($R^2$):**  
-Se mide la precisión del modelo ajustado frente a los datos experimentales mediante:
-   $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}} = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
+El movimiento del agua desde el interior del grano hacia su superficie está gobernado por la Segunda Ley de Fick. Debido a que la humedad cercana a la cáscara escapa más rápido que el agua atrapada en el núcleo, la solución exacta de este fenómeno de difusión corresponde a una serie infinita de decaimientos exponenciales (Serie de Fourier). Sin embargo, como los términos superiores se vuelven despreciables tras la primera hora de proceso, de esta simplificación surge inicialmente la **Ley de Secado de Thin-Layer**, la cual plantea que la velocidad de pérdida de humedad es proporcional a la fuerza impulsora $(M - M_e)$:
+
+$$
+\frac{dM}{dt} = -k(M - M_e)
+$$
+
+Al integrar esta ecuación diferencial desde $t = 0$ hasta cualquier instante $t$ y normalizar los datos mediante la humedad adimensional $Y$ (que escala todo el proceso entre $1$ y $0$), se obtiene una curva exponencial que asume un grano homogéneo sin resistencia geométrica inicial ($a = 1$):
+
+$$
+Y = \frac{M - M_e}{M_0 - M_e} = e^{-kt}
+$$
+
+No obstante, dado que el grano de café posee una geometría elipsoidal con hendidura central, se incorpora también el **Modelo de Henderson-Pabis**:
+
+$$
+Y = a \cdot e^{-kt}
+$$
+
+En esta expresión, el parámetro $a$ conserva las constantes geométricas del primer término de Fourier, actuando como un factor adimensional de forma que corrige las desviaciones estructurales respecto a una esfera perfecta.
+
+## 3. Método Numérico: Regresión por Mínimos Cuadrados Ordinarios
+
+Ajustar directamente funciones exponenciales exige algoritmos iterativos no lineales complejos; por ello, se aplica logaritmo natural ($\ln$) a ambos lados de las ecuaciones para transformarlas en relaciones lineales exactas. De este modo, el modelo de Thin-Layer adopta la forma de una recta forzada al origen ($y = -k \cdot x$), mientras que el modelo de Henderson-Pabis se convierte en una recta completa con intercepto ($y = b - k \cdot x$), donde $x = t$, $y = \ln(Y)$ y $b = \ln(a)$.
+
+Al trasladar este planteamiento a los datos experimentales de `datos_secado_campo.csv`, surge el problema central de Métodos Numéricos: debido al error experimental propio de las mediciones, los $n = 12$ puntos registrados no se alinean de forma exacta. Esto configura un sistema sobredeterminado de doce ecuaciones para hallar dos incógnitas.
+
+Para resolverlo, se implementa el método numérico de **Regresión por Mínimos Cuadrados Ordinarios (MCO)**, cuyo objetivo es encontrar los parámetros que minimizan la suma de los errores cuadráticos ($S$) entre los datos reales ($y_i$) y los valores estimados ($\hat{y}_i$). Para el modelo de Thin-Layer, se deriva la función de costo respecto a $k$ y se iguala a cero ($\frac{dS}{dk} = 0$), obteniendo la ecuación normal directa:
+
+$$
+S(k) = \sum_{i=1}^{n} (y_i + k \cdot x_i)^2 \quad \Longrightarrow \quad k = -\frac{\sum_{i=1}^{n} x_i y_i}{\sum_{i=1}^{n} x_i^2}
+$$
+
+Por su parte, al calibrar el modelo de Henderson-Pabis se minimiza una función de dos variables $S(b, m)$ igualando ambas derivadas parciales a cero ($\frac{\partial S}{\partial b} = 0$ y $\frac{\partial S}{\partial m} = 0$), lo que genera el Sistema de Ecuaciones Normales de Gauss ($2 \times 2$):
+
+$$
+\begin{cases}
+n \cdot b + m \sum_{i=1}^{n} x_i = \sum_{i=1}^{n} y_i \\
+b \sum_{i=1}^{n} x_i + m \sum_{i=1}^{n} x_i^2 = \sum_{i=1}^{n} x_i y_i
+\end{cases}
+$$
+
+Una vez resuelto este sistema lineal, se recuperan los parámetros físicos originales mediante las transformaciones inversas $k = -m$ y $a = e^b$.
+
+## 4. Validación Estadística y Ejecución del Código
+
+Dado que el método de mínimos cuadrados siempre genera una recta óptima sin importar la naturaleza de los datos, resulta imprescindible evaluar el ajuste mediante el **Coeficiente de Determinación ($R^2$)**:
+
+$$
+R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}} = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+$$
+
+Esta métrica compara el error residual del modelo ($SS_{\text{res}}$) frente a la variabilidad total respecto al promedio ($SS_{\text{tot}}$). Al alcanzar valores de $R^2 > 0.99$, se confirma que la física de capa delgada explica con más del $99\%$ de precisión el comportamiento experimental del café y valida numéricamente la constante $k$ calibrada.
 
 # Leydy Andrea Salinas Diaz - Ingeniero de Software, Visualización y Git Master
 # Diseñador del Pipeline, Gráficas y Documentación GitHub
