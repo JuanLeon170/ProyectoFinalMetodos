@@ -1,7 +1,7 @@
 # ProyectoFinalMetodos
 # Mermas de secado del café 
 # Laura Sofia Bolivar Jimenez
-## 3. Modelamiento fisico y calibracion de datos
+## 1. Modelamiento fisico y calibracion de datos
 Constituye la base física y numérica para simular el proceso de secado del café pergamino lavado. En la poscosecha, controlar la velocidad con la que el grano pierde agua resulta indispensable para evitar tanto la proliferación de hongos por exceso de humedad ($M > 12\%$) como la cristalización y fractura física por sobre-secado ($M < 10\%$). Por consiguiente, este desarrollo transforma mediciones experimentales de campo (`datos_secado_campo.csv`) en constantes cinéticas calibradas mediante el algoritmo `calibracion_k.py`.
 
 Por otro lado, se seleccionaron rangos  respaldados por la literatura, como una humedad inicial $M_0 = 50.0\%$ (base húmeda), dado que aproximadamente la mitad del peso del grano recién lavado corresponde a agua libre y ligada.También, se define una humedad de equilibrio $M_e = 10.0\%$, la cual actúa como límite termodinámico en el que la presión de vapor interna del café iguala a la del aire caliente y detiene la transferencia de masa. Finalmente, se delimita un ciclo de monitoreo de $24\text{ horas}$ con intervalos de $2\text{ horas}$
